@@ -1,0 +1,111 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+---
+
+<script>
+  const delimiter = ";";
+
+  const button = document.querySelector("#convert");
+
+  button.addEventListener("click", processDictionaryEntries);
+
+  function processDictionaryEntries() {
+    const inputTextarea = document.querySelector<HTMLTextAreaElement>("#input");
+    const outputTextarea =
+      document.querySelector<HTMLTextAreaElement>("#output");
+
+    if (!inputTextarea || !outputTextarea) {
+      return;
+    }
+
+    const lines = inputTextarea.value.split("\n");
+
+    const resultLines = new Array(lines.length);
+    const regex = /\s*\([^)]*\)$/;
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+
+      if (line.trim() === "") {
+        resultLines[i] = line;
+        continue;
+      }
+
+      const semicolonIndex = line.indexOf(delimiter);
+      if (semicolonIndex === -1) {
+        resultLines[i] = line;
+        continue;
+      }
+
+      const leftPart = line.substring(0, semicolonIndex);
+      const rightPart = line.substring(semicolonIndex + 1);
+
+      const match = regex.exec(rightPart);
+      let additionalInfo = "";
+      let cleanRightPart = rightPart;
+
+      if (match) {
+        additionalInfo = match[0];
+        cleanRightPart = rightPart
+          .substring(0, rightPart.length - additionalInfo.length)
+          .trim();
+      }
+
+      resultLines[i] = `${cleanRightPart};${leftPart}${additionalInfo}`;
+    }
+
+    outputTextarea.value = resultLines.join("\n");
+  }
+</script>
+
+<Layout>
+  <div class="w-full max-w-5xl bg-white shadow-xl rounded-xl p-8 space-y-6">
+    <h1 class="text-3xl font-bold text-center text-gray-800">
+      Anki Reverse Flashcards
+    </h1>
+    <p class="text-center text-gray-500">
+      Paste your text below and click generate
+    </p>
+
+    <div class="flex flex-col md:flex-row gap-6">
+      <!-- Input Area -->
+      <div class="flex-1">
+        <label
+          for="input"
+          class="block mb-2 text-sm font-semibold text-gray-600"
+          >Input text</label
+        >
+        <textarea
+          id="input"
+          name="input"
+          class="w-full h-80 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none font-mono text-sm resize-none"
+          placeholder="restaurant;das Restaurant (Restaurants)"></textarea>
+      </div>
+
+      <!-- Output Area -->
+      <div class="flex-1">
+        <label
+          for="output"
+          class="block mb-2 text-sm font-semibold text-gray-600"
+          >Formatted text</label
+        >
+        <textarea
+          name="output"
+          id="output"
+          class="w-full h-80 p-4 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none font-mono text-sm resize-none"
+          readonly></textarea>
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="text-center">
+      <button
+        id="convert"
+        class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:scale-95 transition"
+      >
+        Generate
+      </button>
+    </div>
+  </div>
+</Layout>
