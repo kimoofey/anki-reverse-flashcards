@@ -6,8 +6,7 @@ import Layout from "../layouts/Layout.astro";
 <script>
   const delimiter = ";";
 
-  const button = document.querySelector("#convert");
-
+  const button = document.querySelector("#previewBtn");
   button.addEventListener("click", processDictionaryEntries);
 
   function processDictionaryEntries() {
@@ -52,7 +51,8 @@ import Layout from "../layouts/Layout.astro";
           .trim();
       }
 
-      resultLines[i] = `${cleanRightPart};${leftPart}${additionalInfo}`;
+      resultLines[i] =
+        `${cleanRightPart}${delimiter}${leftPart}${additionalInfo}`;
     }
 
     outputTextarea.value = resultLines.join("\n");
@@ -60,26 +60,33 @@ import Layout from "../layouts/Layout.astro";
 </script>
 
 <Layout>
-  <div class="w-full max-w-5xl bg-white shadow-xl rounded-xl p-8 space-y-6">
-    <h1 class="text-3xl font-bold text-center text-gray-800">
-      Anki Reverse Flashcards
-    </h1>
-    <p class="text-center text-gray-500">
-      Paste your text below and click generate
-    </p>
+  <div
+    class="w-full max-w-5xl bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 space-y-6"
+  >
+    <header class="flex justify-between items-center">
+      <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
+        Anki Reverse Flashcards
+      </h1>
+      <!-- <button
+        id="settingsBtn"
+        class="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+      >
+        Settings ⚙️
+      </button> -->
+    </header>
 
     <div class="flex flex-col md:flex-row gap-6">
       <!-- Input Area -->
       <div class="flex-1">
         <label
           for="input"
-          class="block mb-2 text-sm font-semibold text-gray-600"
+          class="block mb-2 text-gray-700 dark:text-gray-300 font-medium"
           >Input text</label
         >
         <textarea
           id="input"
           name="input"
-          class="w-full h-80 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none font-mono text-sm resize-none"
+          class="w-full h-80 p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
           placeholder="restaurant;das Restaurant (Restaurants)"></textarea>
       </div>
 
@@ -87,25 +94,33 @@ import Layout from "../layouts/Layout.astro";
       <div class="flex-1">
         <label
           for="output"
-          class="block mb-2 text-sm font-semibold text-gray-600"
+          class="block mb-2 text-gray-700 dark:text-gray-300 font-medium"
           >Formatted text</label
         >
         <textarea
           name="output"
           id="output"
-          class="w-full h-80 p-4 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none font-mono text-sm resize-none"
+          class="w-full h-80 p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 focus:outline-none"
           readonly></textarea>
       </div>
     </div>
 
-    <!-- Button -->
-    <div class="text-center">
+    <div
+      class="flex justify-end gap-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+    >
       <button
-        id="convert"
-        class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:scale-95 transition"
+        id="previewBtn"
+        class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition"
       >
-        Generate
+        Generate Preview
       </button>
+      <!-- <button
+        disabled
+        id="downloadBtn"
+        class="px-5 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition"
+      >
+        Download file
+      </button> -->
     </div>
   </div>
 </Layout>
