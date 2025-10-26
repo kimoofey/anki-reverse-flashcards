@@ -3,62 +3,6 @@ import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<script>
-  const delimiter = ";";
-
-  const button = document.querySelector("#previewBtn");
-  button.addEventListener("click", processDictionaryEntries);
-
-  function processDictionaryEntries() {
-    const inputTextarea = document.querySelector<HTMLTextAreaElement>("#input");
-    const outputTextarea =
-      document.querySelector<HTMLTextAreaElement>("#output");
-
-    if (!inputTextarea || !outputTextarea) {
-      return;
-    }
-
-    const lines = inputTextarea.value.split("\n");
-
-    const resultLines = new Array(lines.length);
-    const regex = /\s*\([^)]*\)$/;
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-
-      if (line.trim() === "") {
-        resultLines[i] = line;
-        continue;
-      }
-
-      const semicolonIndex = line.indexOf(delimiter);
-      if (semicolonIndex === -1) {
-        resultLines[i] = line;
-        continue;
-      }
-
-      const leftPart = line.substring(0, semicolonIndex);
-      const rightPart = line.substring(semicolonIndex + 1);
-
-      const match = regex.exec(rightPart);
-      let additionalInfo = "";
-      let cleanRightPart = rightPart;
-
-      if (match) {
-        additionalInfo = match[0];
-        cleanRightPart = rightPart
-          .substring(0, rightPart.length - additionalInfo.length)
-          .trim();
-      }
-
-      resultLines[i] =
-        `${cleanRightPart}${delimiter}${leftPart}${additionalInfo}`;
-    }
-
-    outputTextarea.value = resultLines.join("\n");
-  }
-</script>
-
 <Layout>
   <div
     class="w-full max-w-5xl bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 space-y-6"
@@ -124,3 +68,5 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </div>
 </Layout>
+
+<script src="../scripts/main.ts"></script>
