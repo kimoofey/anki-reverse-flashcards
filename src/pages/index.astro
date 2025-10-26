@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
+import SettingsDialog from "../components/SettingsDialog.astro";
 ---
 
 <Layout>
@@ -11,16 +12,15 @@ import Layout from "../layouts/Layout.astro";
       <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
         Anki Reverse Flashcards
       </h1>
-      <!-- <button
+      <button
         id="settingsBtn"
         class="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
       >
         Settings ⚙️
-      </button> -->
+      </button>
     </header>
 
     <div class="flex flex-col md:flex-row gap-6">
-      <!-- Input Area -->
       <div class="flex-1">
         <label
           for="input"
@@ -34,7 +34,6 @@ import Layout from "../layouts/Layout.astro";
           placeholder="restaurant;das Restaurant (Restaurants)"></textarea>
       </div>
 
-      <!-- Output Area -->
       <div class="flex-1">
         <label
           for="output"
@@ -58,15 +57,17 @@ import Layout from "../layouts/Layout.astro";
       >
         Generate Preview
       </button>
-      <!-- <button
+      <button
         disabled
         id="downloadBtn"
         class="px-5 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition"
       >
         Download file
-      </button> -->
+      </button>
     </div>
   </div>
+  <SettingsDialog />
 </Layout>
 
 <script src="../scripts/main.ts"></script>
+<script src="../scripts/dialogControl.ts"></script>

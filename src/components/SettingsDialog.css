@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+dialog::backdrop {
+  @apply bg-black/50;
+}

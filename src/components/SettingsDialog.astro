@@ -1,79 +1,81 @@
-<div
-  id="settingsModal"
-  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
->
-  <div
-    class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-md p-6 space-y-6"
-  >
-    <header class="flex justify-between items-center">
-      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
-        Settings
-      </h2>
-      <button
-        id="closeDialogBtn"
-        class="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 text-2xl leading-none"
-      >
-        &times;
-      </button>
-    </header>
+---
+import "./SettingsDialog.css";
+---
 
-    <form class="space-y-4">
-      <!-- Spacing -->
-      <div>
-        <label
-          for="spacing"
-          class="block text-gray-700 dark:text-gray-300 font-medium"
-          >Spacing</label
-        >
-        <input
-          type="number"
-          id="spacing"
-          name="spacing"
-          min="0"
-          max="10"
-          value="2"
-          class="mt-1 w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
-        />
-      </div>
-
-      <!-- Trailing Comma -->
-      <div class="flex items-center">
-        <input
-          type="checkbox"
-          id="trailingComma"
-          class="h-4 w-4 text-blue-600 border-gray-300 rounded"
-        />
-        <label for="trailingComma" class="ml-2 text-gray-700 dark:text-gray-300"
-          >Add trailing comma</label
-        >
-      </div>
-
-      <!-- Theme -->
-      <div>
-        <label class="block text-gray-700 dark:text-gray-300 font-medium mb-1"
-          >Theme</label
-        >
-        <select
-          id="themeSelect"
-          class="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
-        >
-          <option value="system">System</option>
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-        </select>
-      </div>
-
-      <div
-        class="flex justify-end pt-4 border-t border-gray-200 dark:border-gray-700"
-      >
+<dialog id="settingsDialog">
+  <div class="fixed inset-0 flex items-center justify-center">
+    <div
+      class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-md p-6 space-y-6"
+    >
+      <header class="flex justify-between items-center">
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
+          Settings
+        </h2>
         <button
-          type="button"
-          id="saveSettingsBtn"
-          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition"
+          id="closeDialogBtn"
+          class="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 text-2xl leading-none"
         >
-          Save Settings
+          &times;
         </button>
-      </div>
-    </form>
+      </header>
+
+      <form class="space-y-4" method="dialog">
+        <div>
+          <label
+            for="spacing"
+            class="block text-gray-700 dark:text-gray-300 font-medium"
+            >Spacing</label
+          >
+          <input
+            type="number"
+            id="spacing"
+            name="spacing"
+            min="0"
+            max="10"
+            value="2"
+            class="mt-1 w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
+          />
+        </div>
+
+        <div class="flex items-center">
+          <input
+            type="checkbox"
+            id="trailingComma"
+            class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+          />
+          <label
+            for="trailingComma"
+            class="ml-2 text-gray-700 dark:text-gray-300"
+            >Add trailing comma</label
+          >
+        </div>
+
+        <div>
+          <label class="block text-gray-700 dark:text-gray-300 font-medium mb-1"
+            >Theme</label
+          >
+          <select
+            id="themeSelect"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
+          >
+            <option value="system">System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+
+        <div
+          class="flex justify-end pt-4 border-t border-gray-200 dark:border-gray-700"
+        >
+          <button
+            type="submit"
+            id="saveSettingsBtn"
+            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition"
+          >
+            Save Settings
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
+</dialog>
