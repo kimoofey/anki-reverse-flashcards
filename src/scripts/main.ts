@@ -1,15 +1,20 @@
 const delimiter = ";";
 
-const button = document.getElementById("previewBtn");
+const inputTextarea = document.getElementById<HTMLTextAreaElement>("input");
+const outputTextarea = document.getElementById<HTMLTextAreaElement>("output");
 
-if (button) {
-  button.addEventListener("click", processDictionaryEntries);
+const previewButton = document.getElementById("previewBtn");
+const downloadButton = document.getElementById("downloadBtn");
+
+if (previewButton) {
+  previewButton.addEventListener("click", processDictionaryEntries);
+}
+
+if (downloadButton) {
+  downloadButton.addEventListener("click", downloadResultFile);
 }
 
 function processDictionaryEntries() {
-  const inputTextarea = document.getElementById<HTMLTextAreaElement>("input");
-  const outputTextarea = document.getElementById<HTMLTextAreaElement>("output");
-
   if (!inputTextarea || !outputTextarea) {
     return;
   }
@@ -53,4 +58,25 @@ function processDictionaryEntries() {
   }
 
   outputTextarea.value = resultLines.join("\n");
+}
+
+function downloadResultFile() {
+  if (!inputTextarea || !outputTextarea) {
+    return;
+  }
+
+  const blob = new Blob([inputTextarea.value, "\n", outputTextarea.value], {
+    type: "text/plain",
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "result.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
 }
