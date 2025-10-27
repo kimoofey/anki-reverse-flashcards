@@ -20,7 +20,7 @@ import "./SettingsDialog.css";
       </header>
 
       <form class="space-y-4" method="dialog">
-        <div>
+        <!-- <div>
           <label
             for="spacing"
             class="block text-gray-700 dark:text-gray-300 font-medium"
@@ -35,9 +35,9 @@ import "./SettingsDialog.css";
             value="2"
             class="mt-1 w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
           />
-        </div>
+        </div> -->
 
-        <div class="flex items-center">
+        <!-- <div class="flex items-center">
           <input
             type="checkbox"
             id="trailingComma"
@@ -48,6 +48,18 @@ import "./SettingsDialog.css";
             class="ml-2 text-gray-700 dark:text-gray-300"
             >Add trailing comma</label
           >
+        </div> -->
+
+        <div>
+          <label class="block text-gray-700 dark:text-gray-300 font-medium mb-1"
+            >Delimiter</label
+          >
+          <select
+            id="delimiterSelect"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
+          >
+            <option value=";">;</option>
+          </select>
         </div>
 
         <div>
@@ -59,8 +71,8 @@ import "./SettingsDialog.css";
             class="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
           >
             <option value="system">System</option>
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
+            <!-- <option value="light">Light</option> -->
+            <!-- <option value="dark">Dark</option> -->
           </select>
         </div>
 
